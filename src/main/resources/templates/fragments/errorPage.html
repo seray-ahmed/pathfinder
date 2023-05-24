@@ -1,0 +1,22 @@
+<head>
+  <title>Pathfinder</title>
+  <th:block th:include="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+  <th:block th:include="~{fragments/header.html}"/>
+
+  <div class="hero-unit text-center bg-warning rounded">
+    <h1 class="p-5">Error!</h1>
+<!--    <img src="https://img.freepik.com/free-vector/error-404-concept-landing-page_52683-12188.jpg?w=1060&t=st=1669722948~exp=1669723548~hmac=536e5e439b23ef7210d99697a82e910cc551e42b9c23c759ff15fb6df667197e" alt="">-->
+    <h2>Something went wrong!</h2>
+    <p class="pt-5">
+      <a class="btn btn-primary btn-large" th:href="@{/}">
+        Go To Home Page
+      </a>
+    </p>
+  </div>
+
+</div>
+<th:block th:include="~{fragments/footer.html}"/>
+</body>

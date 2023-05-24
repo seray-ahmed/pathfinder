@@ -1,0 +1,51 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Pathfinder</title>
+    <th:block th:replace="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+    <th:block th:replace="~{fragments/header.html}"/>
+
+    <section class="roadHeader">
+        <h1>All Users In System!</h1>
+    </section>
+
+    <section id="allUsers">
+        <th:block th:each="user : ${allUsers}">
+            <div class="card userCard" style="width: 18rem;">
+                <img class="card-img-top" src="/images/profile.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title pb-1" th:text="${user.getUsername()}">Card title</h5>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">
+                        <h5 class="text-left"><strong>Roles: </strong></h5>
+                        <th:block th:each="role : ${user.getRoles()}">
+                            <p class="mb-0" th:text="${role.name.name()}"></p>
+                        </th:block>
+                    </li>
+                    <li class="list-group-item"><span class="bg-secondary p-1 px-4 rounded text-white" th:text="${user.level}">Pro</span></li>
+                    <li class="list-group-item">
+                        <span th:if="${user.getActive()}" class="bg-info p-1 px-4 rounded text-white">ACTIVE</span>
+                        <span th:unless="${user.getActive()}" class="bg-info p-1 px-4 rounded text-white">NOT ACTIVE</span>
+                    </li>
+                </ul>
+                <div class="card-body text-center">
+                    <a th:href="@{/user/details/{id}(id = ${user.getId()})}"><button type="button" class="btn btn-info">More Info</button></a>
+                    <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                </div>
+            </div>
+        </th:block>
+    </section>
+
+
+<!--    <section class="road" th:each="user : ${allUsers}">-->
+<!--        -->
+<!--    </section>-->
+</div>
+</body>
+<th:block th:replace="~{fragments/footer.html}"/>
+</html>

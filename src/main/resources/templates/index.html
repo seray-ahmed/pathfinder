@@ -1,0 +1,75 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Pathfinder</title>
+    <th:block th:include="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+    <th:block th:include="~{fragments/header.html}"/>
+    <section class="top-container">
+        <div class="showcase">
+            <h1>Find amazing routes</h1>
+            <p>Sick of staying at home, sick of limitations? Be free! Find a route and enjoy nature!</p>
+            <a th:href="@{/routes}" class="btn">To routes</a>
+        </div>
+        <div class="top-box top-box-a">
+            <h3></h3>
+            <h4></h4>
+            <h5></h5>
+            <img id="box-a-img" src="" height="150px" alt="Not found">
+            <p id="last-updated"></p>
+        </div>
+    </section>
+    <section class="boxes">
+        <a th:href="@{/pedestrian}" class="main-btn" >
+            <div class="box">
+                <img src="/images/pedestrian.png" height="150px" alt="">
+                <h3>Pedestrian</h3>
+                <p>Is this your Leg day?</p>
+            </div>
+        </a>
+        <a th:href="@{/bicycle}" class="main-btn" >
+            <div class="box">
+                <img src="/images/bicycle.png" height="150px" alt="">
+                <h3>Bicycle</h3>
+                <p>When you want to be one with nature!</p>
+            </div>
+        </a>
+        <a th:href="@{/motorcycle}" class="main-btn" >
+            <div class="box">
+                <img src="/images/motorcycle.png" height="150px" alt="">
+                <h3>Motorcycle</h3>
+                <p>When you want the wind to blow on your face!</p>
+            </div>
+        </a>
+        <a th:href="@{/car}" class="main-btn" >
+            <div class="box">
+                <img src="/images/car.png" height="150px" alt="">
+                <h3>Car</h3>
+                <p>Going on a trip with friends?</p>
+            </div>
+        </a>
+    </section>
+    <section class="road">
+        <th:block th:if="${mostCommented.getPictures().size() > 0}">
+            <img th:src="${mostCommented.getPictures()[0].getUrl()}" src="/images/most-commented.jpg" alt="">
+        </th:block>
+        <div>
+            <h2>The most commented route: <span th:text="${mostCommented.getName()}"></span></h2>
+            <p>Read more about the most commented route and do not miss the
+                chance to visit it and give your opinion to help other users.</p>
+            <a th:href="@{/routes/details/{id}(id = ${mostCommented.getId()})}" class="btn">Learn More</a>
+        </div>
+    </section>
+    <section class="gallery">
+        <img src="http://res.cloudinary.com/ch-cloud/image/upload/v1630583467/koncyanx4gqwzt9vxgx4.jpg" width="200px" height="400px" alt="">
+        <img src="http://res.cloudinary.com/ch-cloud/image/upload/v1630582448/oowojgn4lagybkvv20jb.jpg" width="200px" height="400px" alt="">
+    </section>
+</div>
+    <th:block th:include="~{fragments/footer.html}"/>
+<script src="/js/index.js"></script>
+</body>
+</html>

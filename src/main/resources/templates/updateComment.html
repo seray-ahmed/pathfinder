@@ -1,0 +1,51 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Pathfinder</title>
+    <th:block th:replace="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+    <th:block th:replace="~{fragments/header.html}"/>
+
+    <main class="p-5 align-content-center bg-blur my-register-div">
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7">
+                    <form th:action="@{/comment/update}"
+                          th:method="post"
+                          th:object="${comment}">
+                        <div class="profile-card p-3 py-4">
+                            <!--                         th:method="post"-->
+                            <div class="text-center mt-3">
+                                <div class="px-4 mt-5">
+                                    <h2 class="mt-4 mb-0">Your Comment To Edit!</h2>
+                                </div>
+                                <div class="mt-5 mb-5">
+                                    <textarea th:field="*{textContent}"
+                                              id="message"
+                                              cols="30"
+                                              rows="5"
+                                              class="form-control"
+                                              th:text="${comment.textContent}"
+                                              style="background-color: white;">
+                                    </textarea>
+                                </div>
+                                <div class="buttons">
+                                    <button class="btn btn-outline-primary px-4" type="submit">Save</button>
+                                    <!--                            <button class="btn btn-primary px-4 ms-3">Contact</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+<th:block th:replace="~{fragments/footer.html}"/>
+</html>

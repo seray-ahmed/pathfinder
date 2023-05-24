@@ -1,0 +1,30 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Pathfinder</title>
+    <th:block th:replace="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+    <th:block th:replace="~{fragments/header.html}"/>
+
+    <section class="roadHeader">
+        <h1>All Routes Available!</h1>
+    </section>
+
+    <section class="road" th:each="route : ${allRoutes}">
+        <div>
+            <h2 th:text="${route.name}">Title</h2>
+            <p th:text="${route.description}">Very long description</p>
+            <a th:href="@{/routes/details/{id}(id=${route.getId()})}" class="btn">Learn More</a>
+        </div>
+        <th:block th:if="${route.getPictures().size() > 0}">
+            <img class="rounded w-75 ml-5" th:src="${route.getPictures()[0].getUrl()}" alt="Title image">
+        </th:block>
+
+    </section>
+</div>
+</body>
+<th:block th:replace="~{fragments/footer.html}"/>
+</html>

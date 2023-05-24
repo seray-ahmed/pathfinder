@@ -1,0 +1,11 @@
+<header>
+    <nav class="main-nav">
+        <ul>
+            <li>
+                <a th:href="@{/}">Home</a>
+            </li>
+            <th:block sec:authorize="!isAuthenticated()" th:include="~{/fragments/guest-nav.html}"/>
+            <th:block sec:authorize="isAuthenticated()" th:include="~{/fragments/logged-nav.html }"/>
+        </ul>
+    </nav>
+</header>

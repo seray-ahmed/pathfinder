@@ -1,0 +1,117 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Pathfinder</title>
+    <th:block th:replace="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+    <th:block th:replace="~{fragments/header.html}"/>
+<div class="row justify-content-center ">
+    <form id="add-route-form" class="w-50 rounded text-white mt-5"
+          th:action="@{/routes/add}"
+          th:method="post"
+          th:object="${route}">
+
+        <h3 class="border-left border-light pl-2">Add a new route</h3>
+        <div>
+            <div class="form-group">
+                <label for="inputName" class="col-form-label ">Name</label>
+            </div>
+            <div class="form-group">
+                <input th:field="*{name}"
+                       required minlength="5" maxlength="20"
+                       type="text"
+                       id="inputName"
+                       class="form-control"
+                       aria-describedby="inputNameError">
+                <small id="inputNameError"
+                       class="invalid-feedback bg-danger rounded">Name length must be more than 3 characters
+                </small>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="inputDescription" class="col-form-label ">Description</label>
+            </div>
+            <div class="form-group">
+                    <textarea name="description" 
+                              required minlength="5"
+                              id="inputDescription"
+                              class="form-control"
+                              aria-describedby="inputDescriptionError"></textarea>
+                <small id="inputDescriptionError"
+                       class="invalid-feedback  form-text bg-danger rounded">Description length must be more than 5
+                    characters</small>
+            </div>
+        </div>
+<!--        <div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="inputGpx" class="col-form-label ">GPX Coordinates</label>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input type="file" name="gpxCoordinates"-->
+<!--					   required-->
+<!--                       id="inputGpx"-->
+<!--                       class="form-control-file"-->
+<!--                       aria-describedby="inputGpxError">-->
+<!--                <small id="inputGpxError"-->
+<!--                       class="invalid-feedback  form-text bg-danger rounded">Must be valid GPX Coordinates</small>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div>
+            <div class="form-group">
+                <label for="level">Level</label>
+                <select th:field="*{level}" id="level" class="custom-select">
+<!--                    <option value="BEGINNER" selected>BEGINNER</option>-->
+                    <option
+                            th:each="level : ${levels}"
+                            th:text="${level.name}"
+                            th:value="${level.name()}"
+                            th:selected="${level.name() == level}">Model
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div>
+
+            <div class="form-group">
+                <label for="videoUrl">Youtube Video Url</label>
+                <input th:field="*{videoURL}" id="videoUrl" type="text"
+                       class="form-control" placeholder="Video url">
+            </div>
+       </div>
+<!--        <div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="inputPictures" class="col-form-label ">Pictures (URLs)</label>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                    <textarea th:field="*{pictures}"-->
+<!--                              required minlength="5"-->
+<!--                              placeholder="Please separate URLs with NEW LINE (Enter)!"-->
+<!--                              id="inputPictures"-->
+<!--                              class="form-control"-->
+<!--                              aria-describedby="inputDescriptionError"></textarea>-->
+<!--                <small id="inputPicturesError"-->
+<!--                       class="invalid-feedback  form-text bg-danger rounded">You should add minimum 1 url!</small>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div>
+            <div class="form-group p-3">
+                <label class="p-2" for="categories">Categories:</label>
+                <input th:each="category : ${categories}" class="m-3" type="checkbox" th:field="*{categories}" id="categories"
+                       th:value="${category.name()}" th:text="${category.name()}">
+				<br>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary btn-block w-50" type="submit">Add Route</button>
+        </div>
+
+    </form>
+</div>
+    <th:block th:replace="~{fragments/footer.html}"/>
+</body>
+</html>

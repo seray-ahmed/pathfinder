@@ -1,0 +1,38 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Pathfinder</title>
+    <th:block th:replace="~{fragments/head.html}"/>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+    <th:block th:replace="~{fragments/header.html}"/>
+
+    <th:block th:each="comment : ${comments}">
+        <div class="bg-light card rounded mb-4" style="border: 1px solid gray">
+            <div class="card-header">
+                <a class="mt-2" th:href="@{/user/details/{id}(id=${comment.getAuthor().getId()})}"><h5
+                        th:text="${comment.getAuthor().fullName}"></h5></a>
+                <small class="text-center" th:text="${comment.getCreatedFormatted()}"></small>
+            </div>
+            <div class="card-body">
+                <p th:text="${comment.getTextContent()}" class="card-text">With supporting text below as a
+                    natural lead-in to additional content.</p>
+                <a class="mt-2" th:href="@{/routes/details/{id}(id=${comment.getRoute().getId()})}"><h5
+                        th:text="${comment.getRoute().name}"></h5></a>
+                <a th:href="@{/api/comment/approver/{id}(id = ${comment.getId()})}"><button class="btn-success pl-3 pr-3 pt-1 pb-1 rounded border-dark">Approve</button></a>
+            </div>
+
+        </div>
+    </th:block>
+
+    <script th:src="@{/js/track.js}"></script>
+    <script th:src="@{/js/comments.js}"></script>
+</div>
+<th:block th:replace="~{fragments/footer.html}"/>
+<script src="/js/commentApprover.js"></script>
+</body>
+</html>

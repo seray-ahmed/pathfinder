@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+    dependencies {
+        //Spring Security
+        implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+
+        //MapStruct
+        implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+        //DTO_Validation
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        //Spring cache
+        implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+        //Email Sender
+        implementation 'com.sun.mail:javax.mail:1.6.2'
+
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        runtimeOnly 'mysql:mysql-connector-java'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
